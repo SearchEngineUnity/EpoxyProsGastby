@@ -6,7 +6,7 @@ import GuideHero from '../components/guideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
 import ToC from '../components/tableOfContent';
 import SocialSharing from '../components/socialSharing';
-import SEO from '../components/seo';
+import SEO from '../components/Seo';
 
 import { mapGuideHeroToProps, mapGuideSEOToProps } from '../lib/mapToProps';
 
@@ -75,7 +75,7 @@ export default ({ data }) => {
 
   return (
     // Need code here for if banner return banner
-    
+
     <Layout>
       <SEO {...mapGuideSEOToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />

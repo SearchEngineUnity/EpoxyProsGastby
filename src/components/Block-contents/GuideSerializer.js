@@ -65,8 +65,7 @@ const serializers = {
       return <CtaBtn btn={node} />;
     },
     illustration({ node }) {
-      console.log(node);
-      return <Illustration image={node} />;
+      return <Illustration illustration={node} />;
     },
     basicTable({ node }) {
       return <BasicTable basicTable={node} />;

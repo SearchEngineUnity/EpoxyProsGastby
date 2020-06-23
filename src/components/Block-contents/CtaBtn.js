@@ -1,6 +1,6 @@
-import React from './node_modules/react';
-import { Button } from './node_modules/react-bootstrap';
-import { Link } from './node_modules/gatsby';
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'gatsby';
 
 function CtaBtn({ btn }) {
   if (btn.internalLink) {

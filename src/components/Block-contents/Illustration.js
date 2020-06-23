@@ -1,18 +1,17 @@
-import React from './node_modules/react';
-import Img from './node_modules/gatsby-image';
-import { getFluidGatsbyImage } from './node_modules/gatsby-source-sanity';
+import React from 'react';
+import Img from 'gatsby-image';
+import { getFluidGatsbyImage } from 'gatsby-source-sanity';
+import sanityConfig from '../../../sanityConfig';
 
-const sanityConfig = { projectId: 'udntb7sx', dataset: 'production' };
+function Illustration({ illustration }) {
+  const fluidProps = getFluidGatsbyImage(illustration.image.asset._id, {}, sanityConfig);
 
-function Illustration({ image }) {
-  const fluidProps = getFluidGatsbyImage(image.image.asset._id, {}, sanityConfig);
-
-  if (image.description) {
+  if (illustration.description) {
     return (
       <div style={{ marginBottom: '16px' }}>
         <figure className="text-center">
-          <Img fluid={fluidProps} alt={image.alt} />
-          <figcaption>{image.description}</figcaption>
+          <Img fluid={fluidProps} alt={illustration.alt} />
+          <figcaption>{illustration.description}</figcaption>
         </figure>
       </div>
     );
@@ -20,7 +19,7 @@ function Illustration({ image }) {
   return (
     <div style={{ marginBottom: '16px' }}>
       <picture className="text-center">
-        <Img fluid={fluidProps} alt={image.alt} />
+        <Img fluid={fluidProps} alt={illustration.alt} />
       </picture>
     </div>
   );

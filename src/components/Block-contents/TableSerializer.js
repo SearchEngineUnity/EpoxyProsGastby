@@ -5,11 +5,11 @@ import Illustration from './Illustration';
 
 const serializers = {
   types: {
-    block({ block }) {
-      return <div>{block.children}</div>;
+    block({ children }) {
+      return <div>{children}</div>;
     },
     illustration({ node }) {
-      return <Illustration image={node} />;
+      return <Illustration illustration={node} />;
     },
   },
   marks: {

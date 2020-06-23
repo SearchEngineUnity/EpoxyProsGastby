@@ -1,8 +1,8 @@
-import BaseBlockContent from './node_modules/@sanity/block-content-to-react';
-import React from './node_modules/react';
+import BaseBlockContent from '@sanity/block-content-to-react';
+import React from 'react';
+import { Link } from 'gatsby';
 import CtaBtn from './CtaBtn';
 import Illustration from './Illustration';
-import { Link } from './node_modules/gatsby';
 
 const serializers = {
   types: {
@@ -31,7 +31,7 @@ const serializers = {
       return <CtaBtn btn={node} />;
     },
     illustration({ node }) {
-      return <Illustration image={node} />;
+      return <Illustration illustration={node} />;
       // return null
     },
   },

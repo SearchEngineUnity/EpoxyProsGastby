@@ -37,7 +37,7 @@ function SmartTable({ smartTable }) {
                 return (
                   // eslint-disable-next-line
                   <th key={`${thead._key}-${index}`}>
-                    <Illustration image={cell} />
+                    <Illustration illustration={cell} />
                   </th>
                 );
               }
@@ -63,7 +63,7 @@ function SmartTable({ smartTable }) {
                   return (
                     // eslint-disable-next-line
                     <th key={`${row._key}-${index}`}>
-                      <Illustration image={cell} />
+                      <Illustration illustration={cell} />
                     </th>
                   );
                 }
@@ -81,7 +81,7 @@ function SmartTable({ smartTable }) {
                 return (
                   // eslint-disable-next-line
                   <td key={`${row._key}-${index}`}>
-                    <Illustration image={cell} />
+                    <Illustration illustration={cell} />
                   </td>
                 );
               }

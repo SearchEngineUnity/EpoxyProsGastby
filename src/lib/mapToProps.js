@@ -207,6 +207,6 @@ export function mapGuideHeroToProps({ h1, author, displayDate, heroImage }) {
     h1,
     author: author.name,
     displayDate,
-    image: heroImage.mainImage.image.asset.fluid,
+    image: heroImage.mainImage.image.asset.url,
   };
 }

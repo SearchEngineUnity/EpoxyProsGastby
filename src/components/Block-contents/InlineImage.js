@@ -1,8 +1,7 @@
 import React from 'react';
 import Img from 'gatsby-image';
 import { getFluidGatsbyImage } from 'gatsby-source-sanity';
-
-const sanityConfig = { projectId: 'udntb7sx', dataset: 'production' };
+import sanityConfig from '../../../sanityConfig';
 
 function InlineImage({ image, alt }) {
   const fluidProps = getFluidGatsbyImage(image._id, {}, sanityConfig);

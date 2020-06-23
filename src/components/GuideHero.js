@@ -9,8 +9,8 @@ function GuideHero({ h1, author, displayDate, image }) {
   };
 
   return (
-    <Jumbotron fluid>
-      <Container fluid className="p-0">
+    <Jumbotron fluid style={style}>
+      <Container fluid className="p-0 text-white" style={{ textShadow: '2px 2px gray' }}>
         <div className="col-8 mx-auto">
           <h1>{h1}</h1>
           <br />
@@ -22,11 +22,11 @@ function GuideHero({ h1, author, displayDate, image }) {
   );
 }
 
-PropTypes.guideHero({
+GuideHero.propTypes = {
   h1: PropTypes.string.isRequired,
-  author: PropTypes.object.isRequired,
+  author: PropTypes.string.isRequired,
   displayDate: PropTypes.string.isRequired,
-  image: PropTypes.object.isRequired,
-});
+  image: PropTypes.string.isRequired,
+};
 
 export default GuideHero;

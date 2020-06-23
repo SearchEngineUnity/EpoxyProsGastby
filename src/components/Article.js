@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleContent from './Block-contents/ArticleSerializer';
+import ArticleContent from './block-contents/ArticleSerializer';
 
 function Article({ title, blockContent, colWidth, id }) {
   return (
