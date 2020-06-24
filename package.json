@@ -1,9 +1,13 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "epoxy-pros",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Toronto Epoxy Pros website",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Search Engine Unity",
+  "engines": {
+    "node": "=12.14.1",
+    "npm": "=6.13.4"
+  },
   "dependencies": {
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/image-url": "^0.140.19",
