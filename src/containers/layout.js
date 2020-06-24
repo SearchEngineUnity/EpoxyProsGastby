@@ -9,8 +9,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-import Header from '../components/header';
-import MainNav from '../components/navTypeA';
+import Header from '../components/Header';
+import MainNav from '../components/NavTypeA';
 
 const Layout = ({ children }) => {
   // const data = useStaticQuery(graphql`

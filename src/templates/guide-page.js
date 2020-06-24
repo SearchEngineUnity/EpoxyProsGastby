@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Container } from 'react-bootstrap';
 import Layout from '../containers/layout';
-import GuideCard from '../components/guideCard';
+import GuideCard from '../components/GuideCard';
 import Seo from '../components/Seo';
 
 import { mapGuideCardToProps, mapSeoToProps } from '../lib/mapToProps'; // eslint-disable-line
