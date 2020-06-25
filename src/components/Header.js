@@ -14,7 +14,7 @@ const Header = ({ assets }) => {
       <div className="row justify-content-between">
         {assets.map((img) => {
           return (
-            <div className="col-md-4" key={img.asset._id}>
+            <div className="col-md-4" key={img.asset.id}>
               <Img
                 fluid={img.asset.fluid}
                 alt="The City Painters"

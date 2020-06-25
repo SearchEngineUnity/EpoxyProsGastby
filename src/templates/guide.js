@@ -71,7 +71,7 @@ export const query = graphql`
 
 export default ({ data }) => {
   const type = 'guide';
-  const url = `${data.site.siteMetadata.siteUrl}/guide/${data.guide.slug.current}`;
+  const url = `${data.site.siteMetadata.siteUrl}/${data.guide.slug.current}`;
 
   return (
     // Need code here for if banner return banner

@@ -4,7 +4,7 @@ import { getFluidGatsbyImage } from 'gatsby-source-sanity';
 import sanityConfig from '../../../sanityConfig';
 
 function InlineImage({ image, alt }) {
-  const fluidProps = getFluidGatsbyImage(image._id, {}, sanityConfig);
+  const fluidProps = getFluidGatsbyImage(image.id, {}, sanityConfig);
   return (
     <div style={{ marginBottom: '16px' }}>
       <picture className="text-center">

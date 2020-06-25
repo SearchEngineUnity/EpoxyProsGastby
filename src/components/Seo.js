@@ -31,19 +31,19 @@ function Seo({
       ogType = 'website';
       break;
     case 'guide':
-      metaURL = `${siteUrl}/guide/${slug}`;
+      metaURL = `${siteUrl}/${slug}`;
       ogType = 'article';
       break;
     default:
       break;
   }
 
-  const ogTitle = og ? og.title : title;
-  const ogDescription = og ? og.description : description;
-  const ogImage = og ? og.image.asset.url : heroImage.mainImage.image.asset.url;
+  const ogTitle = og && og.title ? og.title : title;
+  const ogDescription = og && og.descrption ? og.description : description;
+  const ogImage = og && og.image ? og.image.asset.url : heroImage.mainImage.image.asset.url;
 
-  const twitterTitle = twitter ? twitter.title : title;
-  const twitterDescription = twitter ? twitter.description : description;
+  const twitterTitle = twitter && twitter.title ? twitter.title : title;
+  const twitterDescription = twitter && twitter.description ? twitter.description : description;
 
   return (
     <Helmet>

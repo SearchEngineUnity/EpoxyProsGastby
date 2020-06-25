@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
   //       imageAsset {
   //         asset {
   //           url
-  //           _id
+  //           id
   //           fluid {
   //             ...GatsbySanityImageFluid
   //           }
