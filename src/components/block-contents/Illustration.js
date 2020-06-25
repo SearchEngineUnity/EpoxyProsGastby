@@ -4,7 +4,7 @@ import { getFluidGatsbyImage } from 'gatsby-source-sanity';
 import sanityConfig from '../../../sanityConfig';
 
 function Illustration({ illustration }) {
-  const fluidProps = getFluidGatsbyImage(illustration.image.asset._id, {}, sanityConfig);
+  const fluidProps = getFluidGatsbyImage(illustration.image.asset.id, {}, sanityConfig);
 
   if (illustration.description) {
     return (

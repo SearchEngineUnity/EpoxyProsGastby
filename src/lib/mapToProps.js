@@ -178,7 +178,7 @@ export function mapGuideCardToProps({ id, h1, slug, excerpt, cardImage, displayD
     image: cardImage.mainImage.image.asset.fluid,
     imageAlt: cardImage.mainImage.alt,
     imageFilename: cardImage.mainImage.image.asset.originalFilename,
-    url: `/guide/${slug.current}`,
+    url: `/${slug.current}`,
   };
 }
 

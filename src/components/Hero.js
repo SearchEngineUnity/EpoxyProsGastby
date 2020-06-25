@@ -1,7 +1,6 @@
 import React from 'react';
-import './hero.css';
 import { Jumbotron } from 'react-bootstrap';
-import CtaButton from './ctaButton';
+import CtaButton from './CtaButton';
 
 function Hero({ tagLine, title, imageURL, ctaButtons, id }) {
   const style = {

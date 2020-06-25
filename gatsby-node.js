@@ -8,34 +8,33 @@
 
 const path = require('path');
 
-// create all pages but guides page and guides
-// async function createLandingPages (actions, graphql){
-//     const { data } = await graphql(`
-//     {
-//       allSanityPage ( filter: { slug: { current: { ne: "guide" }}}){
-//         edges {
-//           node {
-//             slug {
-//               current
-//             }
-//           }
-//         }
-//       }
-//     }
-//     `)
+// create all structured pages except for /guides
+async function creteStructuredPages(actions, graphql) {
+  const { data } = await graphql(`
+    {
+      allSanityPage(filter: { slug: { current: { ne: "guide" } } }) {
+        edges {
+          node {
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `);
 
-//     const pages = data.allSanityPage.edges
-//     pages.forEach( page => {
-//         actions.createPage({
-//           path: page.node.slug.current === "/" ? "/" : `/${page.node.slug.current}`,
-//           component: path.resolve(`./src/templates/basic.js`),
-//           context: {
-//             slug: page.node.slug.current
-//           }
-//         })
-//       })
-
-// }
+  const pages = data.allSanityPage.edges;
+  pages.forEach((page) => {
+    actions.createPage({
+      path: page.node.slug.current === '/' ? '/' : `/${page.node.slug.current}`,
+      component: path.resolve(`./src/templates/structuredPage.js`),
+      context: {
+        slug: page.node.slug.current,
+      },
+    });
+  });
+}
 
 // creat guides page
 async function createGuidesPage(actions, graphql) {
@@ -84,7 +83,7 @@ async function createGuide(actions, graphql) {
   const guides = data.allSanityGuide.edges;
   guides.forEach((guide) => {
     actions.createPage({
-      path: `/guide/${guide.node.slug.current}`,
+      path: `/${guide.node.slug.current}`,
       component: path.resolve(`./src/templates/guide.js`),
       context: {
         slug: guide.node.slug.current,
@@ -94,7 +93,7 @@ async function createGuide(actions, graphql) {
 }
 
 exports.createPages = async ({ actions, graphql }) => {
-  // await createLandingPages(actions, graphql)
+  await creteStructuredPages(actions, graphql);
   await createGuidesPage(actions, graphql);
   await createGuide(actions, graphql);
 };
