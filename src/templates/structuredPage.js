@@ -37,8 +37,8 @@ export const query = graphql`
             }
             description
             title
-            button {
-              title
+            btnText
+            cardLink {
               externalLink {
                 href
               }
