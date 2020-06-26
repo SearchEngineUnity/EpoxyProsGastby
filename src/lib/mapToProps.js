@@ -175,9 +175,9 @@ export function mapGuideCardToProps({ id, h1, slug, excerpt, cardImage, displayD
     title: h1,
     date: displayDate,
     excerpt,
-    image: cardImage.mainImage.image.asset.fluid,
-    imageAlt: cardImage.mainImage.alt,
-    imageFilename: cardImage.mainImage.image.asset.originalFilename,
+    image: cardImage ? cardImage.mainImage.image.asset.fluid : '',
+    imageAlt: cardImage ? cardImage.mainImage.alt : '',
+    imageFilename: cardImage ? cardImage.mainImage.image.asset.originalFilename : '',
     url: `/${slug.current}`,
   };
 }
