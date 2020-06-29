@@ -98,8 +98,8 @@ export function mapHeroToProps({ tagLine, title, image, ctaButtons }) {
   return {
     tagLine,
     title,
-    image: image.image.asset.fluid,
-    imageURL: image.image.asset.url,
+    image: image ? image.image.asset.fluid : '',
+    imageURL: image ? image.image.asset.url : '',
     ctaButtons: ctaButtons.map((btn) => {
       if (btn.internalLink) {
         return {
@@ -207,6 +207,6 @@ export function mapGuideHeroToProps({ h1, author, displayDate, heroImage }) {
     h1,
     author: author.name,
     displayDate,
-    image: heroImage.mainImage.image.asset.url,
+    image: heroImage ? heroImage.mainImage.image.asset.url : '',
   };
 }
