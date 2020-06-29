@@ -92,8 +92,51 @@ async function createGuide(actions, graphql) {
   });
 }
 
+// create redirect
+async function createPageRedirects(actions, graphql) {
+  const { data } = await graphql(`
+    {
+      allSanityRedirect {
+        edges {
+          node {
+            redirectPaths
+            redirectTo {
+              ... on SanityGuide {
+                slug {
+                  current
+                }
+              }
+              ... on SanityPage {
+                slug {
+                  current
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const redirectEdges = data.allSanityRedirect.edges;
+  redirectEdges.forEach((edge) => {
+    const { redirectPaths, redirectTo } = edge.node;
+    const toPath = redirectTo.slug.current === '/' ? '/' : `/${redirectTo.slug.current}`;
+
+    redirectPaths.forEach((fromPath) => {
+      actions.createRedirect({
+        fromPath,
+        toPath,
+        isPermanent: true,
+        redirectInBrowser: true,
+      });
+    });
+  });
+}
+
 exports.createPages = async ({ actions, graphql }) => {
   await creteStructuredPages(actions, graphql);
   await createGuidesPage(actions, graphql);
   await createGuide(actions, graphql);
+  await createPageRedirects(actions, graphql);
 };
