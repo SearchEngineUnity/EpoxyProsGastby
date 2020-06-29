@@ -115,13 +115,13 @@ export default ({ data }) => {
           switch (_type) {
             case 'grid':
               return (
-                <div>This is the Grid section</div>
+                <div key={segment._key}>This is the Grid section</div>
                 // <Article id={section._key} {...mapArticleToProps(section)} />
               );
 
             case 'hero':
               return (
-                <div>This is the Hero section</div>
+                <div key={segment._key}>This is the Hero section</div>
                 // <Hero id={section._key} {...mapHeroToProps(section)} />
               );
 
