@@ -40,7 +40,8 @@ function Seo({
 
   const ogTitle = og && og.title ? og.title : title;
   const ogDescription = og && og.descrption ? og.description : description;
-  const ogImage = og && og.image ? og.image.asset.url : heroImage.mainImage.image.asset.url;
+  let ogImage = og && og.image ? og.image.asset.url : '';
+  ogImage = ogImage === '' && heroImage ? heroImage.mainImage.image.asset.url : '';
 
   const twitterTitle = twitter && twitter.title ? twitter.title : title;
   const twitterDescription = twitter && twitter.description ? twitter.description : description;
