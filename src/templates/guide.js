@@ -2,13 +2,13 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Container } from 'react-bootstrap';
 import Layout from '../containers/layout';
-import GuideHero from '../components/GuideHero';
+import GuideHero from '../components/guideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
-import ToC from '../components/TableOfContent';
-import SocialSharing from '../components/SocialSharing';
+import ToC from '../components/tableOfContent';
+import SocialSharing from '../components/socialSharing';
 import SEO from '../components/Seo';
 
-import { mapGuideHeroToProps, mapGuideSEOToProps } from '../lib/mapToProps';
+import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
 
 export const query = graphql`
   query guideTemplate($slug: String) {
@@ -77,13 +77,15 @@ export default ({ data }) => {
     // Need code here for if banner return banner
 
     <Layout>
-      <SEO {...mapGuideSEOToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
+      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">
-          <div className="col-md-2">
-            <ToC toc={data.guide.toc} />
-          </div>
+          {data.guide.toc && (
+            <div className="col-md-2">
+              <ToC toc={data.guide.toc} />
+            </div>
+          )}
           <article className="col-md-8">
             <GuideBody blocks={data.guide._rawBody} />
           </article>
