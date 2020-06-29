@@ -6,7 +6,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const {
   NODE_ENV,
-  URL: NETLIFY_SITE_URL = 'https://www.techquanimous.com/',
+  URL: NETLIFY_SITE_URL = 'https://techquanimous.com/',
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env;
@@ -15,8 +15,6 @@ const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
 module.exports = {
   siteMetadata: {
-    // siteUrl: 'http://www.techquanimous.com/',
-    // siteUrl: 'http://cocky-jennings-94427f.netlify.com',
     siteUrl,
   },
   plugins: [
@@ -87,6 +85,11 @@ module.exports = {
             host: null,
           },
           'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null,
+          },
+          development: {
             policy: [{ userAgent: '*', disallow: ['/'] }],
             sitemap: null,
             host: null,

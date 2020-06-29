@@ -4,23 +4,17 @@ import { getFluidGatsbyImage } from 'gatsby-source-sanity';
 import sanityConfig from '../../../sanityConfig';
 
 function Illustration({ illustration }) {
-  const fluidProps = getFluidGatsbyImage(illustration.image.asset.id, {}, sanityConfig);
+  const imageFluid =
+    illustration?.image?.asset?.id || 'image-ba93a9e77b70952257bc194613928b6374960f11-220x124-png';
+  const fluidProps = getFluidGatsbyImage(imageFluid, {}, sanityConfig);
+  const imageFilename = illustration?.image?.asset?.originalFilename || 'image';
 
-  if (illustration.description) {
-    return (
-      <div style={{ marginBottom: '16px' }}>
-        <figure className="text-center">
-          <Img fluid={fluidProps} alt={illustration.alt} />
-          <figcaption>{illustration.description}</figcaption>
-        </figure>
-      </div>
-    );
-  }
   return (
     <div style={{ marginBottom: '16px' }}>
-      <picture className="text-center">
-        <Img fluid={fluidProps} alt={illustration.alt} />
-      </picture>
+      <figure className="text-center">
+        <Img fluid={fluidProps} alt={illustration.alt} title={imageFilename} />
+        {illustration.caption && <figcaption>{illustration.caption}</figcaption>}
+      </figure>
     </div>
   );
 }

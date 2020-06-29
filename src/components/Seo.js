@@ -38,13 +38,12 @@ function Seo({
       break;
   }
 
-  const ogTitle = og && og.title ? og.title : title;
-  const ogDescription = og && og.descrption ? og.description : description;
-  let ogImage = og && og.image ? og.image.asset.url : '';
-  ogImage = ogImage === '' && heroImage ? heroImage.mainImage.image.asset.url : '';
+  const ogTitle = og?.title || title;
+  const ogDescription = og?.description || description;
+  const ogImage = og?.image?.asset?.url || heroImage?.mainImage?.image?.asset?.url || '';
 
-  const twitterTitle = twitter && twitter.title ? twitter.title : title;
-  const twitterDescription = twitter && twitter.description ? twitter.description : description;
+  const twitterTitle = twitter?.title || ogTitle || title;
+  const twitterDescription = twitter?.description || ogDescription || description;
 
   return (
     <Helmet>
