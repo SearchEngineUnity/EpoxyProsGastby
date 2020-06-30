@@ -36,7 +36,7 @@ async function creteStructuredPages(actions, graphql) {
   });
 }
 
-// creat guides page
+// creat guides listing page
 async function createGuidesPage(actions, graphql) {
   const { data } = await graphql(`
     {
@@ -68,7 +68,7 @@ async function createGuidesPage(actions, graphql) {
 async function createGuide(actions, graphql) {
   const { data } = await graphql(`
     {
-      allSanityGuide {
+      allSanityGuide(filter: { isChapter: { ne: true } }) {
         edges {
           node {
             slug {

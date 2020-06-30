@@ -15,7 +15,32 @@ export const query = graphql`
         current
       }
     }
-    guides: allSanityGuide {
+    guides: allSanityGuide(filter: { isChapter: { ne: true } }) {
+      nodes {
+        id
+        h1
+        displayDate
+        slug {
+          current
+        }
+        excerpt {
+          short
+        }
+        cardImage {
+          mainImage {
+            alt
+            image {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    mpGuides: allSanityMpGuide {
       nodes {
         id
         h1
@@ -50,13 +75,26 @@ export const query = graphql`
 
 export default ({ data }) => {
   const type = 'page';
+  const guidesOfAllTypes = [...data.guides.nodes, ...data.mpGuides.nodes];
+
+  const sortedGuidesOfAllTypes = [...guidesOfAllTypes].sort((a, b) => {
+    if (a.displayDate < b.displayDate) {
+      return 1;
+    }
+
+    if (a.displayDate > b.displayDate) {
+      return -1;
+    }
+
+    return 0;
+  });
 
   return (
     <Layout>
       <SEO {...mapSeoToProps(data.page, data.site.siteMetadata.siteUrl, type)} />
       <Container>
         <div className="row">
-          {data.guides.nodes.map((guide) => {
+          {sortedGuidesOfAllTypes.map((guide) => {
             return <GuideCard key={guide.id} {...mapGuideCardToProps(guide)} />;
           })}
         </div>
