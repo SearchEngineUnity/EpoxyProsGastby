@@ -185,8 +185,10 @@ export function mapSeoToProps(
   { title, description, facebook, twitter, slug, noindex, nofollow, canonical, heroImage },
   siteUrl,
   type,
+  mpUrl = '',
 ) {
   return {
+    mpUrl,
     type,
     title,
     description,

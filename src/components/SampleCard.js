@@ -13,13 +13,12 @@ function SampleCard({
   imageAlt,
   url,
 }) {
-
-    //internet/external links as an anchor, title , description, imge without text, button 
+  // internet/external links as an anchor, title , description, imge without text, button
   return (
     <div className="col-4" key={id}>
       <Link to={url}>
         <Card>
-          <Img fluid={image} alt={imageAlt} /> 
+          <Img fluid={image} alt={imageAlt} />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
             <Card.Subtitle>{date.slice(0, 10).replace(/-/g, '/')}</Card.Subtitle>

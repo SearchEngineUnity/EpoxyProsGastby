@@ -117,16 +117,21 @@ async function createMpGuide(actions, graphql) {
   `);
 
   const guides = data.allSanityMpGuide.edges;
+
   guides.forEach((guide) => {
+    const slugArray = [guide.node.slug.current];
+    guide.node.chapters.forEach((chapter) => {
+      slugArray.push(chapter.chapterGuide.slug.current);
+    });
+
     actions.createPage({
       path: `/${guide.node.slug.current}`,
       component: path.resolve(`./src/templates/mpGuide.js`),
       context: {
         slug: guide.node.slug.current,
+        slugArray,
       },
     });
-
-    console.log(JSON.stringify(guide, null, 2))
 
     guide.node.chapters.forEach((chapter) => {
       actions.createPage({
@@ -134,6 +139,7 @@ async function createMpGuide(actions, graphql) {
         component: path.resolve(`./src/templates/chapter.js`),
         context: {
           slug: chapter.chapterGuide.slug.current,
+          slugArray,
         },
       });
     });

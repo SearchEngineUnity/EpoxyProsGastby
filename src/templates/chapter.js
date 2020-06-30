@@ -69,15 +69,17 @@ export const query = graphql`
   }
 `;
 
-export default ({ data }) => {
-  const type = 'guide';
-  const url = `${data.site.siteMetadata.siteUrl}/${data.guide.slug.current}`;
+export default ({ data, pageContext }) => {
+  const type = 'chapter';
+  const { slugArray } = pageContext;
+  const mpUrl = slugArray[0];
+  const url = `${data.site.siteMetadata.siteUrl}/${mpUrl}/${data.guide.slug.current}`;
 
   return (
     // Need code here for if banner return banner
 
     <Layout>
-      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
+      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type, mpUrl)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">

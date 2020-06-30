@@ -4,7 +4,6 @@ import { Container } from 'react-bootstrap';
 import Layout from '../containers/layout';
 import GuideHero from '../components/guideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
-import ToC from '../components/tableOfContent';
 import SocialSharing from '../components/socialSharing';
 import SEO from '../components/Seo';
 
