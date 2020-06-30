@@ -11,8 +11,8 @@ import SEO from '../components/Seo';
 import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
 
 export const query = graphql`
-  query mpGuideTemplate($slug: String) {
-    guide: sanityMpGuide(slug: { current: { eq: $slug } }) {
+  query chapter($slug: String) {
+    guide: sanityGuide(slug: { current: { eq: $slug } }) {
       slug {
         current
       }
@@ -52,6 +52,12 @@ export const query = graphql`
         name
       }
       _rawBody(resolveReferences: { maxDepth: 12 })
+      toc {
+        _key
+        header
+        title
+        type
+      }
       description
       displayDate
     }
@@ -75,7 +81,11 @@ export default ({ data }) => {
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">
-          <div className="col-md-2" />
+          {data.guide.toc && (
+            <div className="col-md-2">
+              <ToC toc={data.guide.toc} />
+            </div>
+          )}
           <article className="col-md-8">
             <GuideBody blocks={data.guide._rawBody} />
           </article>

@@ -81,11 +81,9 @@ export default ({ data }) => {
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">
-          {data.guide.toc && (
-            <div className="col-md-2">
-              <ToC toc={data.guide.toc} />
-            </div>
-          )}
+          <div className="col-md-2">
+            <ToC toc={data.guide.toc} />
+          </div>
           <article className="col-md-8">
             <GuideBody blocks={data.guide._rawBody} />
           </article>
