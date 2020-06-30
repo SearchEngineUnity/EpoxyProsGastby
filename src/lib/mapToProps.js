@@ -169,9 +169,8 @@
 //   };
 // }
 
-export function mapGuideCardToProps({ id, h1, slug, excerpt, cardImage, displayDate }) {
+export function mapGuideCardToProps({ h1, slug, excerpt, cardImage, displayDate }) {
   return {
-    id,
     title: h1,
     date: displayDate,
     excerpt,
@@ -182,12 +181,14 @@ export function mapGuideCardToProps({ id, h1, slug, excerpt, cardImage, displayD
   };
 }
 
-export function mapGuideSEOToProps(
+export function mapSeoToProps(
   { title, description, facebook, twitter, slug, noindex, nofollow, canonical, heroImage },
   siteUrl,
   type,
+  mpUrl = '',
 ) {
   return {
+    mpUrl,
     type,
     title,
     description,

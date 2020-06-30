@@ -4,14 +4,15 @@ import { Container } from 'react-bootstrap';
 import Layout from '../containers/layout';
 import GuideHero from '../components/GuideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
+import ToC from '../components/TableOfContent';
 import SocialSharing from '../components/SocialSharing';
 import SEO from '../components/Seo';
 
 import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
 
 export const query = graphql`
-  query mpGuideTemplate($slug: String) {
-    guide: sanityMpGuide(slug: { current: { eq: $slug } }) {
+  query chapter($slug: String) {
+    guide: sanityGuide(slug: { current: { eq: $slug } }) {
       slug {
         current
       }
@@ -51,6 +52,12 @@ export const query = graphql`
         name
       }
       _rawBody(resolveReferences: { maxDepth: 12 })
+      toc {
+        _key
+        header
+        title
+        type
+      }
       description
       displayDate
     }
@@ -62,19 +69,25 @@ export const query = graphql`
   }
 `;
 
-export default ({ data }) => {
-  const type = 'guide';
-  const url = `${data.site.siteMetadata.siteUrl}/${data.guide.slug.current}`;
+export default ({ data, pageContext }) => {
+  const type = 'chapter';
+  const { slugArray } = pageContext;
+  const mpUrl = slugArray[0];
+  const url = `${data.site.siteMetadata.siteUrl}/${mpUrl}/${data.guide.slug.current}`;
 
   return (
     // Need code here for if banner return banner
 
     <Layout>
-      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
+      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type, mpUrl)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">
-          <div className="col-md-2" />
+          {data.guide.toc && (
+            <div className="col-md-2">
+              <ToC toc={data.guide.toc} />
+            </div>
+          )}
           <article className="col-md-8">
             <GuideBody blocks={data.guide._rawBody} />
           </article>

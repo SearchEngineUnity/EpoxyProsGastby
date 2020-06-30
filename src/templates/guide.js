@@ -8,7 +8,7 @@ import ToC from '../components/TableOfContent';
 import SocialSharing from '../components/SocialSharing';
 import SEO from '../components/Seo';
 
-import { mapGuideHeroToProps, mapGuideSEOToProps } from '../lib/mapToProps';
+import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
 
 export const query = graphql`
   query guideTemplate($slug: String) {
@@ -77,7 +77,7 @@ export default ({ data }) => {
     // Need code here for if banner return banner
 
     <Layout>
-      <SEO {...mapGuideSEOToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
+      <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
       <Container fluid>
         <div className="row">

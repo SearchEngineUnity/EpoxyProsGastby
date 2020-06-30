@@ -36,7 +36,7 @@ async function creteStructuredPages(actions, graphql) {
   });
 }
 
-// creat guides page
+// creat guides listing page (aka /guide)
 async function createGuidesPage(actions, graphql) {
   const { data } = await graphql(`
     {
@@ -64,11 +64,11 @@ async function createGuidesPage(actions, graphql) {
   });
 }
 
-// create individual guide
+// create individual guides
 async function createGuide(actions, graphql) {
   const { data } = await graphql(`
     {
-      allSanityGuide {
+      allSanityGuide(filter: { isChapter: { ne: true } }) {
         edges {
           node {
             slug {
@@ -88,6 +88,60 @@ async function createGuide(actions, graphql) {
       context: {
         slug: guide.node.slug.current,
       },
+    });
+  });
+}
+
+// create MP guides
+async function createMpGuide(actions, graphql) {
+  const { data } = await graphql(`
+    {
+      allSanityMpGuide {
+        edges {
+          node {
+            slug {
+              current
+            }
+            chapters {
+              title
+              chapterGuide {
+                slug {
+                  current
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const guides = data.allSanityMpGuide.edges;
+
+  guides.forEach((guide) => {
+    const slugArray = [guide.node.slug.current];
+    guide.node.chapters.forEach((chapter) => {
+      slugArray.push(chapter.chapterGuide.slug.current);
+    });
+
+    actions.createPage({
+      path: `/${guide.node.slug.current}`,
+      component: path.resolve(`./src/templates/mpGuide.js`),
+      context: {
+        slug: guide.node.slug.current,
+        slugArray,
+      },
+    });
+
+    guide.node.chapters.forEach((chapter) => {
+      actions.createPage({
+        path: `/${guide.node.slug.current}/${chapter.chapterGuide.slug.current}`,
+        component: path.resolve(`./src/templates/chapter.js`),
+        context: {
+          slug: chapter.chapterGuide.slug.current,
+          slugArray,
+        },
+      });
     });
   });
 }
@@ -138,5 +192,6 @@ exports.createPages = async ({ actions, graphql }) => {
   await creteStructuredPages(actions, graphql);
   await createGuidesPage(actions, graphql);
   await createGuide(actions, graphql);
+  await createMpGuide(actions, graphql);
   await createPageRedirects(actions, graphql);
 };

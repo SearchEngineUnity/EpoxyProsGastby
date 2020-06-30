@@ -4,11 +4,11 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-function GuideCard({ id, title, date, image, imageFilename, imageAlt, url }) {
+function GuideCard({ title, date, image, imageFilename, imageAlt, url }) {
   return (
-    <div className="col-4" key={id}>
+    <div className="col-lg-4 col-md-6 col-sm-12" style={{ marginBottom: '32px' }}>
       <Link to={url}>
-        <Card>
+        <Card className="h-100">
           <Img fluid={image} alt={imageAlt} title={imageFilename} />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
@@ -40,7 +40,6 @@ GuideCard.defaultProps = {
 };
 
 GuideCard.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,

@@ -20,6 +20,7 @@ function Seo({
   nofollow,
   canonical,
   heroImage,
+  mpUrl,
 }) {
   let metaURL = '';
   let ogType = '';
@@ -32,6 +33,10 @@ function Seo({
       break;
     case 'guide':
       metaURL = `${siteUrl}/${slug}`;
+      ogType = 'article';
+      break;
+    case 'chapter':
+      metaURL = `${siteUrl}/${mpUrl}/${slug}`;
       ogType = 'article';
       break;
     default:

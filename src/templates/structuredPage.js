@@ -6,7 +6,7 @@ import SEO from '../components/Seo';
 // import Grid from '../components/Grid';
 // import Hero from '../components/Hero';
 
-import { mapGuideSEOToProps } from '../lib/mapToProps';
+import { mapSeoToProps } from '../lib/mapToProps';
 
 // eslint-disable-next-line import/prefer-default-export
 export const query = graphql`
@@ -108,7 +108,7 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO {...mapGuideSEOToProps(data.page, data.site.siteMetadata.siteUrl, type)} />
+      <SEO {...mapSeoToProps(data.page, data.site.siteMetadata.siteUrl, type)} />
       <>
         {data.page.segments.map((segment) => {
           const { _type } = segment;
