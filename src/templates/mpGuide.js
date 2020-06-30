@@ -2,9 +2,9 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Container } from 'react-bootstrap';
 import Layout from '../containers/layout';
-import GuideHero from '../components/guideHero';
+import GuideHero from '../components/GuideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
-import SocialSharing from '../components/socialSharing';
+import SocialSharing from '../components/SocialSharing';
 import SEO from '../components/Seo';
 
 import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
