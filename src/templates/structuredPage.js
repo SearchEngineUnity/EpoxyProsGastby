@@ -6,7 +6,12 @@ import SEO from '../components/Seo';
 // import Grid from '../components/Grid';
 // import Hero from '../components/Hero';
 
+<<<<<<< Updated upstream
 import { mapSeoToProps } from '../lib/mapToProps';
+=======
+import { mapGuideSEOToProps } from '../lib/mapToProps';
+import SampleCardSegment from '../components/SampleCardSegment';
+>>>>>>> Stashed changes
 
 // eslint-disable-next-line import/prefer-default-export
 export const query = graphql`
@@ -115,9 +120,13 @@ export default ({ data }) => {
           switch (_type) {
             case 'grid':
               return (
+<<<<<<< Updated upstream
                 <div key={segment._key}>This is the Grid section</div>
+=======
+                // <div>This is the Grid section</div>
+>>>>>>> Stashed changes
                 // <Article id={section._key} {...mapArticleToProps(section)} />
-              );
+                <SampleCardSegment />)
 
             case 'hero':
               return (
