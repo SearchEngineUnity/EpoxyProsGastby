@@ -3,18 +3,6 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'gatsby';
 // import Img from 'gatsby-image';
 
-<<<<<<< Updated upstream
-function SampleCard({
-  id,
-  title,
-  date,
-  //  excerpt,
-  image,
-  // imageFilename,
-  imageAlt,
-  url,
-}) {
-=======
 // function SampleCard({
 //   id,
 //   title,
@@ -45,16 +33,11 @@ function SampleCard({
 // export default SampleCard;
 
 function SampleCard() {
->>>>>>> Stashed changes
   // internet/external links as an anchor, title , description, imge without text, button
   return (
-    <div className="col-4, thiscard">
+    <div className="col-4">
       <Link to="/">
         <Card>
-<<<<<<< Updated upstream
-          <Img fluid={image} alt={imageAlt} />
-=======
->>>>>>> Stashed changes
           <Card.Body>
             <Card.Title>This is a card</Card.Title>
             <Card.Subtitle>This is its subtitle</Card.Subtitle>
