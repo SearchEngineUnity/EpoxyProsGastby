@@ -1,11 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
 const path = require('path');
 
 // create all structured pages except for /guides
@@ -154,18 +146,7 @@ async function createPageRedirects(actions, graphql) {
         edges {
           node {
             redirectPaths
-            redirectTo {
-              ... on SanityGuide {
-                slug {
-                  current
-                }
-              }
-              ... on SanityPage {
-                slug {
-                  current
-                }
-              }
-            }
+            redirectTo
           }
         }
       }
@@ -175,14 +156,14 @@ async function createPageRedirects(actions, graphql) {
   const redirectEdges = data.allSanityRedirect.edges;
   redirectEdges.forEach((edge) => {
     const { redirectPaths, redirectTo } = edge.node;
-    const toPath = redirectTo.slug.current === '/' ? '/' : `/${redirectTo.slug.current}`;
+    const toPath = redirectTo;
 
     redirectPaths.forEach((fromPath) => {
       actions.createRedirect({
         fromPath,
         toPath,
         isPermanent: true,
-        redirectInBrowser: true,
+        force: true,
       });
     });
   });
