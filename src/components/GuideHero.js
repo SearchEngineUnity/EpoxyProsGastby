@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Jumbotron, Container } from 'react-bootstrap';
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 
 function GuideHero({ h1, author, displayDate, image }) {
   const style = {
@@ -10,13 +10,15 @@ function GuideHero({ h1, author, displayDate, image }) {
 
   return (
     <Jumbotron fluid style={style}>
-      <Container fluid className="p-0 text-white" style={{ textShadow: '2px 2px gray' }}>
-        <div className="col-8 mx-auto">
-          <h1>{h1}</h1>
-          <br />
-          <p>{author}</p>
-          <p>{displayDate.slice(0, 10).replace(/-/g, '/')}</p>
-        </div>
+      <Container fluid>
+        <Row>
+          <Col className="text-white mx-auto col-lg-8 col-md-10">
+            <h1>{h1}</h1>
+            <br />
+            <p>{author}</p>
+            <p style={{ paddingBottom: '91px' }}>{displayDate.slice(0, 10).replace(/-/g, '/')}</p>
+          </Col>
+        </Row>
       </Container>
     </Jumbotron>
   );

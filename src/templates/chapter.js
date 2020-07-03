@@ -72,6 +72,7 @@ export const query = graphql`
 export default ({ data, pageContext }) => {
   const type = 'chapter';
   const { slugArray } = pageContext;
+
   const mpUrl = slugArray[0];
   const url = `${data.site.siteMetadata.siteUrl}/${mpUrl}/${data.guide.slug.current}`;
 
