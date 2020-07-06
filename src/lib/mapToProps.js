@@ -206,7 +206,7 @@ export function mapSeoToProps(
 export function mapGuideHeroToProps({ h1, author, displayDate, heroImage }) {
   return {
     h1,
-    author: author.name,
+    author,
     displayDate,
     image: heroImage?.mainImage?.image?.asset?.url,
   };

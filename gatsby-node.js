@@ -1,11 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
 const path = require('path');
 
 // create all structured pages except for /guides
@@ -99,6 +91,7 @@ async function createMpGuide(actions, graphql) {
       allSanityMpGuide {
         edges {
           node {
+            h1
             slug {
               current
             }
@@ -119,9 +112,17 @@ async function createMpGuide(actions, graphql) {
   const guides = data.allSanityMpGuide.edges;
 
   guides.forEach((guide) => {
-    const slugArray = [guide.node.slug.current];
+    const chaptersArray = [
+      {
+        title: 'Introduction',
+        link: `/${guide.node.slug.current}`,
+      },
+    ];
     guide.node.chapters.forEach((chapter) => {
-      slugArray.push(chapter.chapterGuide.slug.current);
+      chaptersArray.push({
+        title: chapter.title,
+        link: `/${guide.node.slug.current}/${chapter.chapterGuide.slug.current}`,
+      });
     });
 
     actions.createPage({
@@ -129,7 +130,8 @@ async function createMpGuide(actions, graphql) {
       component: path.resolve(`./src/templates/mpGuide.js`),
       context: {
         slug: guide.node.slug.current,
-        slugArray,
+        chaptersArray,
+        mpTitle: guide.node.h1,
       },
     });
 
@@ -139,7 +141,8 @@ async function createMpGuide(actions, graphql) {
         component: path.resolve(`./src/templates/chapter.js`),
         context: {
           slug: chapter.chapterGuide.slug.current,
-          slugArray,
+          chaptersArray,
+          mpTitle: guide.node.h1,
         },
       });
     });
@@ -154,18 +157,7 @@ async function createPageRedirects(actions, graphql) {
         edges {
           node {
             redirectPaths
-            redirectTo {
-              ... on SanityGuide {
-                slug {
-                  current
-                }
-              }
-              ... on SanityPage {
-                slug {
-                  current
-                }
-              }
-            }
+            redirectTo
           }
         }
       }
@@ -175,14 +167,14 @@ async function createPageRedirects(actions, graphql) {
   const redirectEdges = data.allSanityRedirect.edges;
   redirectEdges.forEach((edge) => {
     const { redirectPaths, redirectTo } = edge.node;
-    const toPath = redirectTo.slug.current === '/' ? '/' : `/${redirectTo.slug.current}`;
+    const toPath = redirectTo;
 
     redirectPaths.forEach((fromPath) => {
       actions.createRedirect({
         fromPath,
         toPath,
         isPermanent: true,
-        redirectInBrowser: true,
+        force: true,
       });
     });
   });

@@ -1,10 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Layout from '../containers/layout';
 import GuideHero from '../components/GuideHero';
+import MpGuideToc from '../components/MpGuideToc';
 import GuideBody from '../components/block-contents/GuideSerializer';
-import SocialSharing from '../components/SocialSharing';
 import SEO from '../components/Seo';
 
 import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
@@ -49,6 +49,7 @@ export const query = graphql`
       }
       author {
         name
+        job
       }
       _rawBody(resolveReferences: { maxDepth: 12 })
       description
@@ -62,26 +63,28 @@ export const query = graphql`
   }
 `;
 
-export default ({ data }) => {
+export default ({ data, pageContext }) => {
   const type = 'guide';
   const url = `${data.site.siteMetadata.siteUrl}/${data.guide.slug.current}`;
+  const { slug, chaptersArray } = pageContext;
 
   return (
-    // Need code here for if banner return banner
-
     <Layout>
       <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
-      <Container fluid>
-        <div className="row">
-          <div className="col-md-2" />
-          <article className="col-md-8">
-            <GuideBody blocks={data.guide._rawBody} />
-          </article>
-          <div className="col-md-2">
-            <SocialSharing url={url} />
-          </div>
-        </div>
+      <MpGuideToc
+        currentSlug={slug}
+        chaptersArray={chaptersArray}
+        style={{ marginBottom: '24px', marginTop: '-164px', zIndex: '10' }}
+      />
+      <Container>
+        <Row style={{ paddingTop: '32px' }}>
+          <Col className="mx-auto col-md-8 col-12">
+            <article>
+              <GuideBody blocks={data.guide._rawBody} />
+            </article>
+          </Col>
+        </Row>
       </Container>
     </Layout>
   );
