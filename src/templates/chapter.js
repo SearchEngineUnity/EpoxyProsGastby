@@ -1,14 +1,14 @@
 import React from 'react';
-import { graphql } from 'gatsby';
-import { Container } from 'react-bootstrap';
+import { graphql, Link } from 'gatsby';
+import { Container, Row, Button } from 'react-bootstrap';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Layout from '../containers/layout';
-import GuideHero from '../components/GuideHero';
 import GuideBody from '../components/block-contents/GuideSerializer';
 import ToC from '../components/TableOfContent';
-import SocialSharing from '../components/SocialSharing';
 import SEO from '../components/Seo';
 
-import { mapGuideHeroToProps, mapSeoToProps } from '../lib/mapToProps';
+import { mapSeoToProps } from '../lib/mapToProps';
+import { LinkedinIcon } from 'react-share';
 
 export const query = graphql`
   query chapter($slug: String) {
@@ -50,6 +50,7 @@ export const query = graphql`
       }
       author {
         name
+        job
       }
       _rawBody(resolveReferences: { maxDepth: 12 })
       toc {
@@ -71,29 +72,86 @@ export const query = graphql`
 
 export default ({ data, pageContext }) => {
   const type = 'chapter';
-  const { slugArray } = pageContext;
-  const mpUrl = slugArray[0];
-  const url = `${data.site.siteMetadata.siteUrl}/${mpUrl}/${data.guide.slug.current}`;
+  const { slug, chaptersArray, mpTitle } = pageContext;
+
+  const mpUrl = chaptersArray[0].link;
+  const url = `${data.site.siteMetadata.siteUrl}${mpUrl}/${slug}`;
+
+  const index = chaptersArray.findIndex(
+    (chapter) => chapter.link === `${chaptersArray[0].link}/${slug}`,
+  );
+  const formattedIndex = `0${index}`.slice(-2);
+  const maxChapter = chaptersArray.length - 1;
+  const formattedMaxChapter = `0${maxChapter}`.slice(-2);
+
+  const prev = index === 1 ? null : index - 1;
+  const formattedPrev = `0${prev}`.slice(-2);
+  const prevUrl = index === 1 ? null : chaptersArray[prev].link;
+  const next = index === chaptersArray.length - 1 ? null : index + 1;
+  const formattedNext = `0${next}`.slice(-2);
+  const nextUrl = index === chaptersArray.length - 1 ? null : chaptersArray[next].link;
+
+  console.log(prev, formattedPrev, prevUrl);
+  console.log(next, formattedNext, nextUrl);
+
+  const date = new Date(data.guide.displayDate);
+  const dateTimeFormat = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
-    // Need code here for if banner return banner
-
     <Layout>
       <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type, mpUrl)} />
-      <GuideHero {...mapGuideHeroToProps(data.guide)} />
-      <Container fluid>
+      <Container>
         <div className="row">
           {data.guide.toc && (
-            <div className="col-md-2">
+            <div className="col-lg-2 col-md-12">
               <ToC toc={data.guide.toc} />
             </div>
           )}
-          <article className="col-md-8">
+          <article className="mx-auto col-lg-8 col-md-12">
+            <h4>{mpTitle}</h4>
+            <hr
+              style={{ borderWidth: '3px', borderColor: '#20D340', width: '300px' }}
+              className="mx-0"
+            />
+            <h5 className="py-4">
+              <Link to={chaptersArray[0].link}>Introduction</Link>
+              <span style={{ color: '#20D340' }}> / </span>
+              <span style={{ fontWeight: 'bold' }}>
+                Chapter {formattedIndex} of {formattedMaxChapter}
+              </span>
+            </h5>
+            <h1>{data.guide.h1}</h1>
+            <h6>
+              By <span style={{ fontWeight: 'bold' }}>{data.guide.author.name}</span>{' '}
+              {data.guide.author.job}
+            </h6>
+            <h6>Last updated: {dateTimeFormat.format(date)}</h6>
             <GuideBody blocks={data.guide._rawBody} />
+            <hr />
+            <Row>
+              {prev && (
+                <div className="col-auto mr-auto">
+                  <Link variant="outline-success" to={prevUrl}>
+                    <FaArrowLeft />
+                    {`   Read Chapter ${formattedPrev}`}
+                  </Link>
+                </div>
+              )}
+              {next && (
+                <div className="col-auto ml-auto">
+                  <Link variant="success" to={nextUrl}>
+                    {`Read Chapter ${formattedNext}   `}
+                    <FaArrowRight />
+                  </Link>
+                </div>
+              )}
+            </Row>
           </article>
-          <div className="col-md-2">
-            <SocialSharing url={url} />
-          </div>
+          <div className="col-lg-2 col-md-12" />
         </div>
       </Container>
     </Layout>

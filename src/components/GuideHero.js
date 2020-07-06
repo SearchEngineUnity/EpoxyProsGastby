@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Jumbotron, Container } from 'react-bootstrap';
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 
 function GuideHero({ h1, author, displayDate, image }) {
   const style = {
@@ -10,13 +10,19 @@ function GuideHero({ h1, author, displayDate, image }) {
 
   return (
     <Jumbotron fluid style={style}>
-      <Container fluid className="p-0 text-white" style={{ textShadow: '2px 2px gray' }}>
-        <div className="col-8 mx-auto">
-          <h1>{h1}</h1>
-          <br />
-          <p>{author}</p>
-          <p>{displayDate.slice(0, 10).replace(/-/g, '/')}</p>
-        </div>
+      <Container>
+        <Row>
+          <Col className="text-white mx-auto col-md-8 col-12">
+            <h1>{h1}</h1>
+            <br />
+            <p style={{ marginBottom: '8px' }}>
+              By <span style={{ fontWeight: 'bold' }}>{author.name}</span> {author.job}
+            </p>
+            <p style={{ paddingBottom: '91px' }}>
+              Last updated: {displayDate.slice(0, 10).replace(/-/g, '/')}
+            </p>
+          </Col>
+        </Row>
       </Container>
     </Jumbotron>
   );
@@ -29,7 +35,10 @@ GuideHero.defaultProps = {
 
 GuideHero.propTypes = {
   h1: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    job: PropTypes.string,
+  }).isRequired,
   displayDate: PropTypes.string.isRequired,
   image: PropTypes.string,
 };
