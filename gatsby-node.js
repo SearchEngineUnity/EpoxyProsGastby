@@ -91,6 +91,7 @@ async function createMpGuide(actions, graphql) {
       allSanityMpGuide {
         edges {
           node {
+            h1
             slug {
               current
             }
@@ -130,6 +131,7 @@ async function createMpGuide(actions, graphql) {
       context: {
         slug: guide.node.slug.current,
         chaptersArray,
+        mpTitle: guide.node.h1,
       },
     });
 
@@ -140,6 +142,7 @@ async function createMpGuide(actions, graphql) {
         context: {
           slug: chapter.chapterGuide.slug.current,
           chaptersArray,
+          mpTitle: guide.node.h1,
         },
       });
     });

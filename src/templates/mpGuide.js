@@ -49,6 +49,7 @@ export const query = graphql`
       }
       author {
         name
+        job
       }
       _rawBody(resolveReferences: { maxDepth: 12 })
       description
@@ -76,9 +77,9 @@ export default ({ data, pageContext }) => {
         chaptersArray={chaptersArray}
         style={{ marginBottom: '24px', marginTop: '-164px', zIndex: '10' }}
       />
-      <Container fluid>
+      <Container>
         <Row style={{ paddingTop: '32px' }}>
-          <Col className="mx-auto col-lg-8 col-md-10">
+          <Col className="mx-auto col-md-8 col-12">
             <article>
               <GuideBody blocks={data.guide._rawBody} />
             </article>

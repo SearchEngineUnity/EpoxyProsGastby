@@ -9,7 +9,7 @@ function Social({ social }) {
         {social.map((socialMedia) => (
           <div className={socialMedia.width} key={socialMedia.id}>
             <h3>{socialMedia.title}</h3>
-            <a href={social.externallink.url}>
+            <a href={social.externallink.url} target="_blank" rel="noopener noreferrer">
               <Img fluid={socialMedia.image} />
             </a>
           </div>

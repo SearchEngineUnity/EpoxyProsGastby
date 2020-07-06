@@ -10,13 +10,17 @@ function GuideHero({ h1, author, displayDate, image }) {
 
   return (
     <Jumbotron fluid style={style}>
-      <Container fluid>
+      <Container>
         <Row>
-          <Col className="text-white mx-auto col-lg-8 col-md-10">
+          <Col className="text-white mx-auto col-md-8 col-12">
             <h1>{h1}</h1>
             <br />
-            <p>{author}</p>
-            <p style={{ paddingBottom: '91px' }}>{displayDate.slice(0, 10).replace(/-/g, '/')}</p>
+            <p style={{ marginBottom: '8px' }}>
+              By <span style={{ fontWeight: 'bold' }}>{author.name}</span> {author.job}
+            </p>
+            <p style={{ paddingBottom: '91px' }}>
+              Last updated: {displayDate.slice(0, 10).replace(/-/g, '/')}
+            </p>
           </Col>
         </Row>
       </Container>
@@ -31,7 +35,10 @@ GuideHero.defaultProps = {
 
 GuideHero.propTypes = {
   h1: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    job: PropTypes.string,
+  }).isRequired,
   displayDate: PropTypes.string.isRequired,
   image: PropTypes.string,
 };

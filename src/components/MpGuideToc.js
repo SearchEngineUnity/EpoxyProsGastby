@@ -1,22 +1,22 @@
 import React from 'react';
 import { Container, Row, Card, Nav, Accordion } from 'react-bootstrap';
-import { Link } from 'gatsby';
 import { FaChevronDown } from 'react-icons/fa';
+import { Link } from 'gatsby';
 
 function MpGuideToc({ currentSlug, chaptersArray, style }) {
   const currentUrl = `/${currentSlug}`;
 
   return (
-    <Container fluid style={style}>
+    <Container style={style}>
       <Row>
-        <Accordion className="col-lg-8 col-md-10 mx-auto" defaultActiveKey="0">
+        <Accordion className="col-md-8 col-12 mx-auto" defaultActiveKey="0">
           <Card style={{ boxShadow: '0px 3px 6px #00000029', borderRadius: '4px' }}>
             <Accordion.Toggle
               as={Card.Header}
               eventKey="0"
               style={{
                 borderBottom: 'none',
-                fontSize: '2em',
+                fontSize: '2rem',
                 backgroundColor: 'white',
                 padding: '24px',
               }}
@@ -31,9 +31,12 @@ function MpGuideToc({ currentSlug, chaptersArray, style }) {
                 <Nav className="row">
                   {chaptersArray.map((chapter, index) => {
                     const formattedIndex = `0${index}`.slice(-2);
+                    console.log(chapter.link)
                     return (
-                      <Nav.Link
-                        href={chapter.link}
+                      <Link
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={index}
+                        to={chapter.link}
                         className="col-lg-6"
                         style={{ padding: '0 24px 24px 24px', marginBottom: '0' }}
                       >
@@ -61,7 +64,7 @@ function MpGuideToc({ currentSlug, chaptersArray, style }) {
                             {chapter.title}
                           </div>
                         </Row>
-                      </Nav.Link>
+                      </Link>
                     );
                   })}
                 </Nav>

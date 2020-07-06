@@ -79,12 +79,12 @@ export default ({ data }) => {
     <Layout>
       <SEO {...mapSeoToProps(data.guide, data.site.siteMetadata.siteUrl, type)} />
       <GuideHero {...mapGuideHeroToProps(data.guide)} />
-      <Container fluid>
+      <Container>
         <div className="row">
           <div className="col-md-2">
             <ToC toc={data.guide.toc} />
           </div>
-          <article className="col-md-8">
+          <article className="col-md-8 col-12">
             <GuideBody blocks={data.guide._rawBody} />
           </article>
           <div className="col-md-2">
