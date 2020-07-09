@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import Header from '../components/Header';
 import MainNav from '../components/NavTypeA';
+import GlobalStyle from '../global/GlobalStyle';
 
 const Layout = ({ children }) => {
   // const data = useStaticQuery(graphql`
@@ -110,18 +111,14 @@ const Layout = ({ children }) => {
       </Helmet>
       {/* <Header assets={data.asset.nodes[0].imageAsset} />
       <MainNav menu={data.menu.menu}/> */}
-      <div
-        style={{
-          margin: `0 auto`,
-        }}
-      >
-        <main>{children}</main>
-        {/* <footer>
+
+      <GlobalStyle />
+      <>{children}</>
+      {/* <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer> */}
-      </div>
     </>
   );
 };
