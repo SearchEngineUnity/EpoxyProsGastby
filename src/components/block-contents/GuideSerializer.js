@@ -79,23 +79,14 @@ const serializers = {
   },
   marks: {
     internalLink: ({ mark, children }) => {
-      const { slug = {}, _type, isChapter, _id } = mark.reference;
-      console.log(isChapter);
-      const mpSlug = null;
-      // if (_type === 'chapter' && isChapter) {
-      //   const data = graphql`
-      //     query MyQuery {
-      //       guide: sanityMpGuide(chapters: {elemMatch: {chapterGuide: {slug: {current: {eq: ${slug}}}}}}) {
-      //         slug {
-      //           current
-      //         }
-      //       }
-      //     }
-      //   `;
+      const { slug = {}, _type, isChapter, parentGuide } = mark.reference;
+      let href = slug.current === '/' ? `/` : `/${slug.current}`;
+      let mpSlug = '';
 
-      //   mpSlug = data.guide.slug.current;
-      // }
-      const href = _type === 'page' ? `/${slug.current}` : `/${_type}/${slug.current}`;
+      if (_type === 'guide' && isChapter) {
+        mpSlug = parentGuide.slug.current;
+        href = `/${mpSlug}/${slug.current}`;
+      }
       return <Link to={href}>{children}</Link>;
     },
     externalLink: ({ mark, children }) => {
