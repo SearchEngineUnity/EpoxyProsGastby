@@ -5,10 +5,6 @@ import { Link } from 'gatsby';
 
 function MpGuideToc({ currentSlug, chaptersArray, style }) {
   const currentUrl = `/${currentSlug}`;
-  const style = {
-    
-  };
-
 
   return (
     <Container style={style}>
