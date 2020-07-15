@@ -1,6 +1,6 @@
 import BaseBlockContent from '@sanity/block-content-to-react';
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import BasicTable from './BasicTable';
 import CtaBtn from './CtaBtn';
 import Illustration from './Illustration';
@@ -79,8 +79,14 @@ const serializers = {
   },
   marks: {
     internalLink: ({ mark, children }) => {
-      const { slug = {}, _type } = mark.reference;
-      const href = _type === 'page' ? `/${slug.current}` : `/${_type}/${slug.current}`;
+      const { slug = {}, _type, isChapter, parentGuide } = mark.reference;
+      let href = slug.current === '/' ? `/` : `/${slug.current}`;
+      let mpSlug = '';
+
+      if (_type === 'guide' && isChapter) {
+        mpSlug = parentGuide.slug.current;
+        href = `/${mpSlug}/${slug.current}`;
+      }
       return <Link to={href}>{children}</Link>;
     },
     externalLink: ({ mark, children }) => {

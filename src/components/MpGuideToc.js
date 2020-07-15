@@ -35,7 +35,6 @@ function MpGuideToc({ currentSlug, chaptersArray, style }) {
                 <Nav className="row">
                   {chaptersArray.map((chapter, index) => {
                     const formattedIndex = `0${index}`.slice(-2);
-                    console.log(chapter.link)
                     return (
                       <Link
                         // eslint-disable-next-line react/no-array-index-key

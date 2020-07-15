@@ -51,7 +51,7 @@ export const query = graphql`
       author {
         name
       }
-      _rawBody(resolveReferences: { maxDepth: 12 })
+      _rawBody(resolveReferences: { maxDepth: 14 })
       toc {
         _key
         header

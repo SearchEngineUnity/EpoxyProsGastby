@@ -110,7 +110,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <SEO {...mapSeoToProps(data.page, data.site.siteMetadata.siteUrl, type)} />
-      <>
+      <main>
         {data.page.segments.map((segment) => {
           const { _type } = segment;
           switch (_type) {
@@ -131,7 +131,7 @@ export default ({ data }) => {
               return <div>Still under development</div>;
           }
         })}
-      </>
+      </main>
     </Layout>
   );
 };

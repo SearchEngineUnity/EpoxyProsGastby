@@ -2,13 +2,13 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { Container, Row, Button } from 'react-bootstrap';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { LinkedinIcon } from 'react-share';
 import Layout from '../containers/layout';
 import GuideBody from '../components/block-contents/GuideSerializer';
 import ToC from '../components/TableOfContent';
 import SEO from '../components/Seo';
 
 import { mapSeoToProps } from '../lib/mapToProps';
-import { LinkedinIcon } from 'react-share';
 
 export const query = graphql`
   query chapter($slug: String) {
@@ -90,9 +90,6 @@ export default ({ data, pageContext }) => {
   const next = index === chaptersArray.length - 1 ? null : index + 1;
   const formattedNext = `0${next}`.slice(-2);
   const nextUrl = index === chaptersArray.length - 1 ? null : chaptersArray[next].link;
-
-  console.log(prev, formattedPrev, prevUrl);
-  console.log(next, formattedNext, nextUrl);
 
   const date = new Date(data.guide.displayDate);
   const dateTimeFormat = new Intl.DateTimeFormat('en', {

@@ -1,5 +1,5 @@
 import React from 'react';
-// import './highlightDefinition.css';
+import PropTypes from 'prop-types';
 import { FaBook } from 'react-icons/fa';
 import { Alert } from 'react-bootstrap';
 import ArticleContent from './block-contents/ArticleSerializer';
