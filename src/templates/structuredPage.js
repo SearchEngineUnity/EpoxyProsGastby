@@ -7,6 +7,7 @@ import SEO from '../components/Seo';
 // import Hero from '../components/Hero';
 
 import { mapSeoToProps } from '../lib/mapToProps';
+import SampleCardSegment from '../components/SampleCardSegment';
 
 // eslint-disable-next-line import/prefer-default-export
 export const query = graphql`
@@ -115,8 +116,9 @@ export default ({ data }) => {
           switch (_type) {
             case 'grid':
               return (
-                <div key={segment._key}>This is the Grid section</div>
+                // <div>This is the Grid section</div>
                 // <Article id={section._key} {...mapArticleToProps(section)} />
+                <SampleCardSegment />
               );
 
             case 'hero':

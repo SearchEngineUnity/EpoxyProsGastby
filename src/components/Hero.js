@@ -11,9 +11,9 @@ function Hero({ tagLine, title, imageURL, ctaButtons, id }) {
   return (
     <div className="col-12" key={id}>
       <Jumbotron fluid style={style}>
-        <h1>{title}</h1>
-        <p>{tagLine}</p>
-        <CtaButton buttons={ctaButtons} />
+        {title && <h1>{title}</h1>}
+        {tagLine && <p>{tagLine}</p>}
+        {ctaButtons && <CtaButton buttons={ctaButtons} />}
       </Jumbotron>
     </div>
   );
