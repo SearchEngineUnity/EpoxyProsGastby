@@ -1,7 +1,7 @@
 const path = require('path');
 
 // create all structured pages except for /guides
-async function creteStructuredPages(actions, graphql) {
+async function createStructuredPages(actions, graphql) {
   const { data } = await graphql(`
     {
       allSanityPage(filter: { slug: { current: { ne: "guide" } } }) {
@@ -181,7 +181,7 @@ async function createPageRedirects(actions, graphql) {
 }
 
 exports.createPages = async ({ actions, graphql }) => {
-  await creteStructuredPages(actions, graphql);
+  await createStructuredPages(actions, graphql);
   await createGuidesPage(actions, graphql);
   await createGuide(actions, graphql);
   await createMpGuide(actions, graphql);
